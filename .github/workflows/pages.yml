@@ -2,7 +2,7 @@ name: Deploy React to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # <-- change to master if your default branch is master
+    branches: [ main ]   # change to master if needed
   workflow_dispatch:
 
 permissions:
@@ -28,17 +28,10 @@ jobs:
           cache: 'npm'
 
       - name: Install deps
-        run: npm ci
+        run: npm ci || npm i
 
       - name: Build
-        run: |
-          # Tries the standard "build" script in package.json
-          if npm run -s build; then
-            echo "Build OK"
-          else
-            echo "No build script found. Add one in package.json."
-            exit 1
-          fi
+        run: npm run build
 
       - name: Detect build dir (dist or build)
         id: detect
@@ -49,13 +42,13 @@ jobs:
             echo "dir=build" >> $GITHUB_OUTPUT
           else
             echo "Could not find dist/ or build/ output."
+            ls -la
             exit 1
           fi
 
-      # SPA fallback so refresh on routes doesn't 404
+      # SPA fallback so React Router refresh doesn't 404
       - name: Add SPA 404 fallback
-        run: |
-          cp "${{ steps.detect.outputs.dir }}/index.html" "${{ steps.detect.outputs.dir }}/404.html"
+        run: cp "${{ steps.detect.outputs.dir }}/index.html" "${{ steps.detect.outputs.dir }}/404.html"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
