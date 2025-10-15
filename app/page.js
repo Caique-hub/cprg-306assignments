@@ -23,6 +23,16 @@ export default function Home() {
           <li className="tracking-[-.01em]">
             Save and see your changes instantly.
           </li>
+          <li className="tracking-[-.01em]">
+            <a href="/week-4" className="text-blue-600 hover:underline">
+              Go to Week 4
+            </a>
+          </li>
+          <li className="tracking-[-.01em]">
+            <a href="/week-5" className="text-blue-600 hover:underline">
+              Go to Week 5
+            </a>
+          </li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
