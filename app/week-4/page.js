@@ -1,9 +1,9 @@
 import NewItem from "./new-item";
 
-export default function Week4() {
+export default function Page() {
   return (
-    <main>
-      <h1>New Item</h1>
+    <main className="p-6">
+      <h1 className="text-3xl font-bold mb-6">New Item</h1>
       <NewItem />
     </main>
   );
